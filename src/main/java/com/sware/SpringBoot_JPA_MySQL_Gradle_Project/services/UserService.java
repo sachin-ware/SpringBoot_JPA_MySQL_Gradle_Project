@@ -1,5 +1,6 @@
 package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,9 @@ public class UserService {
 	public User saveUserToDb(User user) {
 		User usr=new User();
 		try {
+			Date now =new Date();
+			user.setCreatedDate(now);
+			user.setModifiedDate(now);
 			usr=userRepository.save(user);
 		} catch (Exception e) {
 			System.out.println("Exception in seveUserToDb:"+e.getMessage());
@@ -38,6 +42,15 @@ public class UserService {
 			System.out.println("Exception in getUserById:"+e.getMessage());
 		}
 		return usr;
+	}
+	public User updateUser(User user) {
+		try {
+			user.setModifiedDate(new Date());
+			user=userRepository.save(user);
+		} catch (Exception e) {
+			System.out.println("Exception in updateUser:"+e.getMessage());
+		}
+		return user;
 	}
 
 }
