@@ -52,5 +52,16 @@ public class UserService {
 		}
 		return user;
 	}
+	
+	
+	public User findUserByEmailAddress(String emailid){
+		User urs=null;
+		try {
+			urs=userRepository.findByEmailAddress(emailid);
+		} catch (Exception e) {
+			System.out.println("Exception in findUserByEmailAddress:"+e.getMessage());
+		}
+		return 		urs;
+	}
 
 }

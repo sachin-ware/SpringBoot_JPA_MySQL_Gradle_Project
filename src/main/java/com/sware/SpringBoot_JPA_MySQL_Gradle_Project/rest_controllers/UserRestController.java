@@ -63,11 +63,24 @@ public class UserRestController {
 		return tempUser;
 	}
 	
-@PutMapping("/user")
-public User updateUser(@RequestBody User user){
-	User usr=userService.updateUser(user);
-	return usr;
-}
+	
+	@GetMapping("/user/getuserbyemailid/{emailid:.+}")  //':.+' is used to get data after . symbol as well. e.g. sachin@gmail.com (http://localhost:8081/user/getuserbyemailid/user3@gmail.com)
+	public User findUserByEmailId(@PathVariable String emailid){
+		User tempUser=null;
+		try {
+			tempUser=userService.findUserByEmailAddress(emailid);
+			
+		} catch (Exception e) {
+			System.out.println("EXCEPTION saveUser in findUserByEmailId:-----------------------------\n"+e.getMessage());
+		}
+		return tempUser;
+	}
+	
+	@PutMapping("/user")
+	public User updateUser(@RequestBody User user){
+		User usr=userService.updateUser(user);
+		return usr;
+	}
 	
 
 }
