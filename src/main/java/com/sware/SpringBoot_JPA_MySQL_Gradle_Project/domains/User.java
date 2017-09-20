@@ -21,31 +21,23 @@ import lombok.Data;
 //@NoArgsConstructor//Defines No argument constructor
 @Entity
 @Table(name="User")
-@Data
+
 public class User implements Serializable {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "user_id")
 	Integer userId;
-	
 	@Column(name = "user_name")
 	String userName;
 	@Column(name = "password")
 	String password;
-	
 	String email;
 	String fname;
 	String lname;
 	Date dob;
-	
-
 	Date createdDate;
 	Date modifiedDate;
 	Timestamp lastAccessed;
-	
-	
-	
 	
 	public Integer getUserId() {
 		return userId;
@@ -111,6 +103,9 @@ public class User implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ ", fname=" + fname + ", lname=" + lname + ", dob=" + dob + ", createdDate=" + createdDate
+				+ ", modifiedDate=" + modifiedDate + ", lastAccessed=" + lastAccessed + "]";
 	}
+	
 }

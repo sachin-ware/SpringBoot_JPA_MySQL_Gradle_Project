@@ -82,5 +82,12 @@ public class UserRestController {
 		return usr;
 	}
 	
+	@GetMapping("/user/bylastname/{fName}")
+	
+	public List<User> updateUser(@PathVariable String fName){
+		List<User> usr=userService.findByUserFirstName(fName);
+		return usr;
+	}
+	
 
 }
