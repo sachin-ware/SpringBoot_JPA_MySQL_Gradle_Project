@@ -224,6 +224,64 @@ Now you can test by running the project as java application using right click an
 			}
 
 
+*******************************************************************************
+SWAGGER CONFIGURATION IN SPRINGBOOT+GRADLE MYSQL PROJECT:
+
+used refference link:
+https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger
+
+
+In your project build.gradle file add following dependancies:
+dependencies {
+	compile('io.springfox:springfox-swagger-ui:2.6.1')
+	compile ('io.springfox:springfox-swagger2:2.6.1')
+}
+
+now run command on root path: gradlew eclipse (it will download all dependencies mentioned in build.gradle file and swagger dependencies.)
+
+Now create swagger configuration class in spring boots applicaiton scanable path i.e. this class should come under component-scan path of the application.
+
+package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.config;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import static springfox.documentation.builders.PathSelectors.regex;
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+    @Bean
+    public Docket productApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.sware.SpringBoot_JPA_MySQL_Gradle_Project.rest_controllers"))
+                //.paths(regex("/product.*"))
+                //.paths(regex("/user.*"))// this will look for the url having 'user' and something preceding to it.
+                
+                .paths( PathSelectors.any())//this will look for all controller classes in class path
+                .build()
+                .apiInfo(metaData());
+    }
+    private ApiInfo metaData() {
+        ApiInfo apiInfo = new ApiInfo(
+                "Spring Boot REST API ",
+                "Spring Boot REST API for SpringBoot_JPA_MySQL_Gradle_Project",
+                "1.0",
+                "Terms of service",
+                new Contact("SACHIN WARE", "website.url", "sware@osius.com"),
+               "Apache License Version 2.0",
+                "https://www.apache.org/licenses/LICENSE-2.0");
+        return apiInfo;
+    }
+}
+
+Now run your project and hit:#http://localhost:8081/swagger-ui.html
+Here 8081 is my application's running port number.
 
 
 
