@@ -3,6 +3,7 @@ package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.rest_controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService;
 
 @RestController
+@CrossOrigin//This annotation allows client browser to get data successfully by  hitting endpoints from other port than server's port. 
 @RequestMapping("/")
 public class UserRestController {
 	@Autowired
