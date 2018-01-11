@@ -14,6 +14,7 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	public List<User> getAllUsers(){
+		//Integer n=10/0;
 
 		 List<User> userList=new ArrayList<>();
 		try {

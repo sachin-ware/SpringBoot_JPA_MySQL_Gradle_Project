@@ -27,6 +27,7 @@ public class UserRestController {
 		List<User> userList=null;
 		try {
 			userList=userService.getAllUsers();
+		//	Integer n=10/0;
 			System.out.println(userList);
 		} catch (Exception e) {
 			System.out.println("Exception in GetAllUsers:"+e.getMessage());
