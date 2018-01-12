@@ -1,6 +1,7 @@
 package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,10 @@ import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.repositories.UserRepository
 public class UserService {
 	@Autowired
 	UserRepository userRepository;
+	
 	public List<User> getAllUsers(){
 		//Integer n=10/0;
-
+		
 		 List<User> userList=new ArrayList<>();
 		try {
 			userList=userRepository.findAll();
@@ -23,8 +25,14 @@ public class UserService {
 		} catch (Exception e) {
 			System.out.println("Exception in UserRepostory:"+e.getMessage());
 		}
+		System.out.println("Before Sorting:"+userList);
+		Collections.sort(userList);
+		System.out.println("After Sorting:"+userList);
+		
 		return userList;
 	}
+	
+	
 	public User saveUserToDb(User user) {
 		User usr=new User();
 		try {
@@ -37,6 +45,7 @@ public class UserService {
 		}
 		return usr;
 	}
+	
 	public User getUserById(Integer id) {
 		User usr=new User();
 		try {
@@ -46,6 +55,7 @@ public class UserService {
 		}
 		return usr;
 	}
+	
 	public User updateUser(User user) {
 		try {
 			user.setModifiedDate(new Date());

@@ -22,7 +22,34 @@ import lombok.Data;
 @Entity
 @Table(name="User")
 
-public class User implements Serializable {
+public class User implements Serializable,Comparable<User>
+{
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "user_id")
@@ -106,6 +133,13 @@ public class User implements Serializable {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
 				+ ", fname=" + fname + ", lname=" + lname + ", dob=" + dob + ", createdDate=" + createdDate
 				+ ", modifiedDate=" + modifiedDate + ", lastAccessed=" + lastAccessed + "]";
+	}
+	@Override
+	public int compareTo(User o) {
+//		if(o.createdDate !=null)
+//		return this.createdDate.compareTo(o.createdDate);
+//		return 0;
+		return this.userId-o.userId;
 	}
 	
 }
