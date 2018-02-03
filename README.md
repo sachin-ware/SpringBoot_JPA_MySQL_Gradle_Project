@@ -26,8 +26,8 @@ Now you can test by running the project as java application using right click an
 		spring.jpa.show-sql = true  
 		#MYSQL
 		spring.datasource.url=jdbc:mysql://localhost:3306/sachintestdb
-		spring.datasource.username=root
-		spring.datasource.password=root
+		spring.datasource.username=root  #this is the username in database in which your database is present
+		spring.datasource.password=root  #if user password is set enter it here else comment this line
 		spring.datasource.driverClassName=com.mysql.jdbc.Driver
 		spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 
@@ -282,6 +282,19 @@ public class SwaggerConfig {
 
 Now run your project and hit:#http://localhost:8081/swagger-ui.html
 Here 8081 is my application's running port number.
+/*************************************************************************************************/
 
+Configure project after cloning from git:
 
+clone project using git credientials and url.
 
+1. Then go to root directory using command prompt and fire 'gradlew eclipse eclipse' , this command downloads eclipse dependencies.
+2. Then again fire command gradlew clean build to download all  reference dependencies, verify if downloaded.
+3. Change project facets to java in project properties to view project in java like structure.
+
+Note: If there is any gradle or maven dependancies that is causing a project build to fail, try to remove that dependency and then try to build again.
+Ex. If testCompile:Junit dependency is giving error while build process then remove this dependency and then try to build it again.
+
+4. Check if database with name 'sachintestdb' is present with the username 'root' and password 'root' in the database, if not then create it.
+5. If tables required for the application are not present in the database, then we have to create them manually. For that you can use dbscript file present inside this project to produce tables.
+6. For Sample data for each table we have <tablename>.json files in the project for each table, you can refer it. 
