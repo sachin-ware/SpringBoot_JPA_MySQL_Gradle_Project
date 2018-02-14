@@ -1,3 +1,7 @@
+// crete db
+CREATE SCHEMA `sachintestdb` ;
+
+
 DROP TABLE IF EXISTS `sachintestdb`.`user`;
 CREATE TABLE  `sachintestdb`.`user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
