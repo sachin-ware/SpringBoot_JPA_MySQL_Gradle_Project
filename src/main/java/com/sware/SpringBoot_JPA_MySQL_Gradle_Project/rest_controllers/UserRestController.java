@@ -38,12 +38,15 @@ public class UserRestController {
 	
 	@GetMapping("/")
 	public String home(){
-		return "<b>Hi, welcome to SRW Rest Server . . <b> \n folowing are our endpoints\n "
-				+"1. GET : /users - For all users \n"
-				+"2. GET : /user/{id} - specific user \n"
-				+"2. POST : /user - Save user \n"
-				+"2. DELETE : /user/{id} - delete user\n"
-				+"This is Default response from SpringBootJpaMySqlGradleProjectApplication !!!";
+		return "<b style='color:red;'>Hi, welcome to SRW Rest Server . . </b> <br"
+				+ " <h4>folowing are our endpoints\n </h4><br>"
+				+"<h5>1. GET : /users - For all users </h5><br>"
+				+"<h5>2. GET : /user/{id} - specific user </h5><br>"
+				+"<h5>3. POST : /user - Save user </h5><br>"
+				+"<h5>4. DELETE : /user/{id} - delete user </h5><br>"
+				+"<h5>5. /user/getuserbyemailid/{emailid:.+} :find user by email id </h5><br>"
+				
+				+"<p>This is Default response from SpringBootJpaMySqlGradleProjectApplication !!! </p>";
 	}
 	
 	
