@@ -38,9 +38,9 @@ public class UserRestController {
 	
 	@GetMapping("/")
 	public String home(){
-		return "<div style='height:900px;background-color: Lavender ;width:100%;pading-left:20%;'>  "
-				+ "<b style='color:red;'>Hi, welcome to SRW Rest Server . . </b> <br"
-				+ " <h4>folowing are our endpoints\n </h4><br>"
+		return "<div style='height:900px;background-color: Lavender ;width:100%;padding-left:20%;'>  "
+				+ "<h3 style='color:red;'>Hi, welcome to SRW Rest Server . . </h3> <br><br>"
+				+ "<h4>Folowing are our endpoints\n </h4><br>"
 				+"<h5>1. GET : /users - For all users </h5><br>"
 				+"<h5>2. GET : /user/{id} - specific user </h5><br>"
 				+"<h5>3. POST : /user - Save user </h5><br>"
