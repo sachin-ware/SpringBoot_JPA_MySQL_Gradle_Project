@@ -44,7 +44,7 @@ public class UserRestController {
 				+"<h5>2. GET : /user/{id} - specific user </h5><br>"
 				+"<h5>3. POST : /user - Save user </h5><br>"
 				+"<h5>4. DELETE : /user/{id} - delete user </h5><br>"
-				+"<h5>5. /user/getuserbyemailid/{emailid:.+} :find user by email id </h5><br>"
+				+"<h5>5. /user/getuserbyemailid/{emailid:.+} :find user by email id </h5><br>."
 				
 				+"<p>This is Default response from SpringBootJpaMySqlGradleProjectApplication !!! </p>";
 	}
