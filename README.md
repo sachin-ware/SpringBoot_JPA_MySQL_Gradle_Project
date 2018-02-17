@@ -227,7 +227,7 @@ Now you can test by running the project as java application using right click an
 *******************************************************************************
 SWAGGER CONFIGURATION IN SPRINGBOOT+GRADLE MYSQL PROJECT:
 
-used refference link:
+used refference link to setup:
 https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger
 
 

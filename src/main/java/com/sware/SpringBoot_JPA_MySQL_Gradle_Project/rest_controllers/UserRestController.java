@@ -52,6 +52,7 @@ public class UserRestController {
 				+"<b>3. POST : /user - Save user </b><br>"
 				+"<b>4. DELETE : /user/{id} - delete user </b><br>"
 				+"<b>5. /user/getuserbyemailid/{emailid:.+} :find user by email id </b><br>."
+				+ "<h3><a href='https://sachin-ware-sb-rest-server.herokuapp.com/swagger-ui.html'>Click to see swagger exposed endpoint.</a></h3>"
 				
 				+"<p>This is Default response from SpringBootJpaMySqlGradleProjectApplication !!! </p>"
 				+ "</div>";
