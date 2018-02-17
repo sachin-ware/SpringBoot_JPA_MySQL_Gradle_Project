@@ -20,7 +20,7 @@ import lombok.Data;
 //@AllArgsConstructor//Defines All argument constructor 
 //@NoArgsConstructor//Defines No argument constructor
 @Entity
-@Table(name="User")
+@Table(name="User3")
 
 public class User implements Serializable,Comparable<User>
 {

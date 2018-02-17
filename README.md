@@ -298,3 +298,28 @@ Ex. If testCompile:Junit dependency is giving error while build process then rem
 4. Check if database with name 'sachintestdb' is present with the username 'root' and password 'root' in the database, if not then create it.
 5. If tables required for the application are not present in the database, then we have to create them manually. For that you can use dbscript file present inside this project to produce tables.
 6. For Sample data for each table we have <tablename>.json files in the project for each table, you can refer it. 
+
+
+/***********************Configure project for PostgreSQL Databse*************/
+1.Add dependancy 'runtime('org.postgresql:postgresql')' in build.dradle in dependancies object.
+2.Now run gradlew eclipse eclipse to download latest added dependancies.
+3.now fun 'gradlew clean build' 
+4.In Application.properties file add driver and other details related to postgresSQL :
+		spring.jpa.database=POSTGRESQL 
+		spring.datasource.platform=postgres
+		spring.jpa.show-sql=true
+		spring.jpa.hibernate.ddl-auto=update  //Due to this property database tables will auto created if they does not exist.
+			validate: validate the schema, makes no changes to the database.
+			update: update the schema.
+			create: creates the schema, destroying previous data.
+			create-drop: drop the schema at the end of the session
+		
+		spring.database.driverClassName=org.postgresql.Driver
+		spring.datasource.url=jdbc:postgresql://localhost:5432/sachintestdb
+		spring.datasource.username=postgres
+		
+		NOTE: 'User' table is default table in postgressql so try to user anather name for the same, otherwise it will throw sqlgrammer 		exception.
+
+
+
+
