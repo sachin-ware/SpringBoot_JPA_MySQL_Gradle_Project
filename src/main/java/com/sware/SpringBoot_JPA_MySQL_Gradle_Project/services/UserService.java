@@ -46,6 +46,27 @@ public class UserService {
 		return usr;
 	}
 	
+	
+	public User[] saveMultipleUsersToDb(User[] user) {
+		User savedUsers[]=new User[user.length];
+		int i=0;
+		try {
+			
+			for(User tmpUser:user) {
+				Date now =new Date();
+				tmpUser.setCreatedDate(now);
+				tmpUser.setModifiedDate(now);
+				savedUsers[i]=userRepository.save(tmpUser);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Exception in seveUserToDb:"+e.getMessage());
+		}
+		return savedUsers;
+	}
+	
+	
+	
 	public User getUserById(Integer id) {
 		User usr=new User();
 		try {
@@ -98,6 +119,17 @@ public class UserService {
 		}
 		
 		return usrList;
+	}
+
+
+	public void deleteUser(Integer userId) {
+		// TODO Auto-generated method stub
+		try {
+			userRepository.delete(userId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 	

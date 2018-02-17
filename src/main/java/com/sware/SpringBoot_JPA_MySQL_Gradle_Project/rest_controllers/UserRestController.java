@@ -1,15 +1,18 @@
 package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.rest_controllers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User;
@@ -83,6 +86,20 @@ public class UserRestController {
 		return tempUser;
 	}
 	
+	@PostMapping("/users")
+	public List<User> saveMultipleUser(@RequestBody User[] users){
+		List<User>userList=null;
+		try {
+			userList=Arrays.asList(userService.saveMultipleUsersToDb(users));
+			
+		} catch (Exception e) {
+			System.out.println("EXCEPTION saveUser in UserRestController:-----------------------------\n"+e.getMessage());
+		}
+		return userList;
+	}
+	
+	
+	
 	
 	@GetMapping("/user/getuserbyemailid/{emailid:.+}")  //':.+' is used to get data after . symbol as well. e.g. sachin@gmail.com (http://localhost:8081/user/getuserbyemailid/user3@gmail.com)
 	public User findUserByEmailId(@PathVariable String emailid){
@@ -107,6 +124,17 @@ public class UserRestController {
 	public List<User> updateUser(@PathVariable String fName){
 		List<User> usr=userService.findByUserFirstName(fName);
 		return usr;
+	}
+	
+	@DeleteMapping("/user/{id}")
+	public @ResponseBody String deleteUser(@PathVariable Integer userId) {
+		String res=null;
+		try {
+			userService.deleteUser(userId);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "User Deleted Successfully . . .";
 	}
 	
 
