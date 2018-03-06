@@ -93,7 +93,7 @@ public class UserRestController {
 			userList=Arrays.asList(userService.saveMultipleUsersToDb(users));
 			
 		} catch (Exception e) {
-			System.out.println("EXCEPTION saveUser in UserRestController:-----------------------------\n"+e.getMessage());
+			System.out.println("EXCEPTION saveUser in UserRestController:-----------------------------Changed test\n"+e.getMessage());
 		}
 		return userList;
 	}
