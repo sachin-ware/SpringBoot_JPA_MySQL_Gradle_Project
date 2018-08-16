@@ -1,9 +1,13 @@
 package com.sware.SpringBoot_JPA_MySQL_Gradle_Project.rest_controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService;
@@ -24,6 +30,31 @@ import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService;
 public class UserRestController {
 	@Autowired
 	private UserService userService;
+	
+	// Following Endpoint is created to upload multipart file.
+	//To Test this endpoint use postman and select key-type as file and choose any file in body tab for post request with given url.
+	//Here @RequestBody did not worked.
+	@PostMapping("/uploadPic")
+	public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile multipartFile){
+		
+		try {
+			
+			File fileDir = new File("rowFiles");
+		    if (! fileDir.exists()){
+		    	fileDir.mkdir();
+		        // If you require it to make the entire directory path including parents,
+		        // use directory.mkdirs(); here instead.
+		    }
+			File physicalFile=new File(multipartFile.getOriginalFilename());
+			FileOutputStream fout=new FileOutputStream(fileDir.getName()+"/"+physicalFile);
+			fout.write(multipartFile.getBytes());
+			fout.close();
+		} catch (Exception e) {
+			System.out.println("upload:"+e.getMessage());
+			// TODO: handle exception
+		}
+		return new ResponseEntity<Object>("File uploaded successfully",HttpStatus.OK);
+	}
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
