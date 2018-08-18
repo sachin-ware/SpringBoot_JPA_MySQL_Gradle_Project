@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService;
 
@@ -37,6 +40,7 @@ public class UserRestController {
 	@PostMapping("/uploadPic")
 	public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile multipartFile){
 		
+		String cloudinaryImgURL=null;
 		try {
 			
 			File fileDir = new File("rowFiles");
@@ -45,16 +49,34 @@ public class UserRestController {
 		        // If you require it to make the entire directory path including parents,
 		        // use directory.mkdirs(); here instead.
 		    }
+		    String fileName=multipartFile.getOriginalFilename();
 			File physicalFile=new File(multipartFile.getOriginalFilename());
 			FileOutputStream fout=new FileOutputStream(fileDir.getName()+"/"+physicalFile);
 			fout.write(multipartFile.getBytes());
 			fout.close();
+			
+			
+			Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+					  "cloud_name", "your_cloud_name",
+					  "api_key", "your_api_key",
+					  "api_secret", "your_secret_key"));
+			//Cloudinary cloudinary = new Cloudinary();
+			
+			File toUpload = new File("rowFiles/"+fileName);
+			Map params = ObjectUtils.asMap("public_id", "SRWRestImageBase/"+fileName);
+			Map uploadResult = cloudinary.uploader().upload(toUpload, params);
+			System.out.println("==============>>"+uploadResult.get("url"));
+			cloudinaryImgURL=uploadResult.get("url").toString();
+			
+			
 		} catch (Exception e) {
 			System.out.println("upload:"+e.getMessage());
 			// TODO: handle exception
 		}
-		return new ResponseEntity<Object>("File uploaded successfully",HttpStatus.OK);
+		return new ResponseEntity<Object>("File uploaded successfully:"+cloudinaryImgURL,HttpStatus.OK);
 	}
+	
+	
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
