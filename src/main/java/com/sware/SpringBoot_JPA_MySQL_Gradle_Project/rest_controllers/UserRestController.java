@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
+//import com.cloudinary.Singleton;
 import com.cloudinary.utils.ObjectUtils;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User;
 import com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService;
@@ -56,15 +57,18 @@ public class UserRestController {
 			fout.close();
 			
 			
-			Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+			/*Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
 					  "cloud_name", "your_cloud_name",
 					  "api_key", "your_api_key",
-					  "api_secret", "your_secret_key"));
-			//Cloudinary cloudinary = new Cloudinary();
-			
+					  "api_secret", "your_secret_key"));*/
+								
 			File toUpload = new File("rowFiles/"+fileName);
+			Cloudinary cloudinary = new Cloudinary();
+			System.out.println("API Key:"+cloudinary.config.apiKey);
 			Map params = ObjectUtils.asMap("public_id", "SRWRestImageBase/"+fileName);
 			Map uploadResult = cloudinary.uploader().upload(toUpload, params);
+			//Map uploadResult =Singleton.getCloudinary().uploader().upload(toUpload, params);
+			toUpload.delete();
 			System.out.println("==============>>"+uploadResult.get("url"));
 			cloudinaryImgURL=uploadResult.get("url").toString();
 			

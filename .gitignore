@@ -1,4 +1,5 @@
-.gradle
+#.gradle
+*.class
 /build/
 !gradle/wrapper/gradle-wrapper.jar
 /bin
@@ -24,3 +25,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/.gradle/
