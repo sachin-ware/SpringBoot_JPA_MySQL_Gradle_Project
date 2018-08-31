@@ -39,7 +39,8 @@ public class UserRestController {
 	//To Test this endpoint use postman and select key-type as file and choose any file in body tab for post request with given url.
 	//Here @RequestBody did not worked.
 	@PostMapping("/uploadPic")
-	public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile multipartFile){
+	//public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile multipartFile){
+		public String upload(@RequestParam("file") MultipartFile multipartFile){
 		String cloudinaryImgURL=null;
 		try {
 			File fileDir = new File("rowFiles");
@@ -62,7 +63,7 @@ public class UserRestController {
 		} catch (Exception e) {
 			System.out.println("upload:"+e.getMessage());
 		}
-		return new ResponseEntity<Object>("File uploaded successfully:"+cloudinaryImgURL,HttpStatus.OK);
+		return cloudinaryImgURL;
 	}
 	
 	
