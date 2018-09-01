@@ -24,17 +24,18 @@ public class UserAspect {
        System.out.println("++++++++++++++++++++++++++++++Creating UserBefore Pointcut: \n"+user.toString());
 
     }
-    
+   
     @Around("execution(* com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService.saveUserToDb(..)) ")
-    public void aroundUserSave(ProceedingJoinPoint joinPoint)throws Throwable {
+    public Object aroundUserSave(ProceedingJoinPoint joinPoint)throws Throwable {
         System.out.println("++++++++++Around Before Proceed : \n");
          long startTime=System.currentTimeMillis();
         
-        joinPoint.proceed();
+        Object returnedObj=joinPoint.proceed();  // let method execute.
         long endTime=System.currentTimeMillis();
         long timeTaken=endTime-startTime;
-        
+       
         System.out.println("+++++++++++Around After Proceed :"+timeTaken);
+        return returnedObj;  // return whatever is returned by method
      }
     
     @After("execution(* com.sware.SpringBoot_JPA_MySQL_Gradle_Project.services.UserService.saveUserToDb(com.sware.SpringBoot_JPA_MySQL_Gradle_Project.domains.User)) && args(user)")

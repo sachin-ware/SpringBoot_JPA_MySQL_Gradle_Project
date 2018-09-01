@@ -35,7 +35,7 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
-	// Following Endpoint is created to upload multipart file.
+	// Following Endpoint is created to upload mu ltipart file.
 	//To Test this endpoint use postman and select key-type as file and choose any file in body tab for post request with given url.
 	//Here @RequestBody did not worked.
 	@PostMapping("/uploadPic")
@@ -122,6 +122,7 @@ public class UserRestController {
 		User tempUser=null;
 		try {
 			tempUser=userService.saveUserToDb(user);
+			System.out.println("SRW-LOGS===> user created:"+tempUser.toString());
 			
 		} catch (Exception e) {
 			System.out.println("EXCEPTION saveUser in UserRestController:-----------------------------\n"+e.getMessage());
@@ -136,7 +137,7 @@ public class UserRestController {
 			userList=Arrays.asList(userService.saveMultipleUsersToDb(users));
 			
 		} catch (Exception e) {
-			System.out.println("EXCEPTION saveUser in UserRestController:-----------------------------Changed test\n"+e.getMessage());
+			System.out.println("EXCEPTION saveMultipleUser in UserRestController:-----------------------------Changed test\n"+e.getMessage());
 		}
 		return userList;
 	}
