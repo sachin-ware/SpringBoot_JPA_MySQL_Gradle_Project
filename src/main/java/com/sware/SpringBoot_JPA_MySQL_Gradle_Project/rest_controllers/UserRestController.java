@@ -35,7 +35,7 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 	
-	// Following Endpoint is created to upload mu ltipart file.
+	// Following Endpoint is created to upload multipart file.
 	//To Test this endpoint use postman and select key-type as file and choose any file in body tab for post request with given url.
 	//Here @RequestBody did not worked.
 	@PostMapping("/uploadPic")
@@ -60,6 +60,39 @@ public class UserRestController {
 			toUpload.delete();
 			System.out.println("==============>>"+uploadResult.get("url"));
 			cloudinaryImgURL=uploadResult.get("url").toString();
+		} catch (Exception e) {
+			System.out.println("upload:"+e.getMessage());
+		}
+		return cloudinaryImgURL;
+	}
+	
+	
+	@PostMapping("/uploadProfilePic/{userId}")
+	//public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile multipartFile){
+		public String uploadProfilePic(@RequestParam("file") MultipartFile multipartFile,@PathVariable Integer userId){
+		String cloudinaryImgURL=null;
+		try {
+			File fileDir = new File("rowFiles");
+		    if (! fileDir.exists()){
+		    	fileDir.mkdir();
+		    }
+		    String fileName=multipartFile.getOriginalFilename();
+			File physicalFile=new File(multipartFile.getOriginalFilename());
+			FileOutputStream fout=new FileOutputStream(fileDir.getName()+"/"+physicalFile);
+			fout.write(multipartFile.getBytes());
+			fout.close();
+			File toUpload = new File("rowFiles/"+fileName);
+			Cloudinary cloudinary = new Cloudinary();
+			System.out.println("API Key:"+cloudinary.config.apiKey);
+			Map params = ObjectUtils.asMap("public_id", "SRWRestImageBase/"+fileName);
+			Map uploadResult = cloudinary.uploader().upload(toUpload, params);
+			toUpload.delete();
+			System.out.println("==============>>"+uploadResult.get("url"));
+			cloudinaryImgURL=uploadResult.get("url").toString();
+			User user=getUser(userId);
+			user.setProPicUrl(cloudinaryImgURL);
+			updateUser(user);
+			
 		} catch (Exception e) {
 			System.out.println("upload:"+e.getMessage());
 		}

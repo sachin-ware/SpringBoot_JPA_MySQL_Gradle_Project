@@ -26,29 +26,7 @@ public class User implements Serializable,Comparable<User>
 {
 	
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
-		return true;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -56,6 +34,7 @@ public class User implements Serializable,Comparable<User>
 	Integer userId;
 	@Column(name = "user_name")
 	String userName;
+	
 	@Column(name = "password")
 	String password;
 	String email;
@@ -65,6 +44,7 @@ public class User implements Serializable,Comparable<User>
 	Date createdDate;
 	Date modifiedDate;
 	Timestamp lastAccessed;
+	String proPicUrl;
 	
 	public Integer getUserId() {
 		return userId;
@@ -128,11 +108,19 @@ public class User implements Serializable,Comparable<User>
 		this.lastAccessed = lastAccessed;
 	}
 	
+	public String getProPicUrl() {
+		return proPicUrl;
+	}
+	public void setProPicUrl(String proPicUrl) {
+		this.proPicUrl = proPicUrl;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
 				+ ", fname=" + fname + ", lname=" + lname + ", dob=" + dob + ", createdDate=" + createdDate
-				+ ", modifiedDate=" + modifiedDate + ", lastAccessed=" + lastAccessed + "]";
+				+ ", modifiedDate=" + modifiedDate + ", lastAccessed=" + lastAccessed + ", proPicUrl=" + proPicUrl
+				+ "]";
 	}
 	@Override
 	public int compareTo(User o) {
@@ -142,4 +130,27 @@ public class User implements Serializable,Comparable<User>
 		return this.userId-o.userId;
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
 }
