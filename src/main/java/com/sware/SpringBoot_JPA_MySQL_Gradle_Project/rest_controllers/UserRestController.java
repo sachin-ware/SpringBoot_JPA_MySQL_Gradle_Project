@@ -203,7 +203,7 @@ public class UserRestController {
 		return usr;
 	}
 	
-	@DeleteMapping("/user/{id}")
+	@DeleteMapping("/user/{userId}")
 	public @ResponseBody String deleteUser(@PathVariable Integer userId) {
 		String res=null;
 		try {
