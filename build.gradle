@@ -23,7 +23,11 @@ repositories {
 	mavenCentral()
 }
 
-
+ext.junit4Version        = '4.12'
+ext.junitVintageVersion  = '4.12.2'
+ext.junitPlatformVersion = '1.0.2'
+ext.junitJupiterVersion  = '5.0.2'
+ext.log4jVersion         = '2.9.0'
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
@@ -40,6 +44,21 @@ dependencies {
 	//compile group: 'com.cloudinary', name: 'cloudinary-core', version: '1.19.0'
 	//compile group: ‘com.cloudinary’, name: ‘cloudinary-http44’, version: ‘1.19.0’
 	compile group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.19.0'
+	
+	 // JUnit Jupiter API and TestEngine implementation
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+ 
+    // If you also want to support JUnit 3 and JUnit 4 tests
+    testCompile("junit:junit:${junit4Version}")
+    testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
+ 
+    // To avoid compiler warnings about @API annotations in JUnit code
+    testCompileOnly('org.apiguardian:apiguardian-api:1.0.0')
+ 
+    // To use Log4J's LogManager
+    testRuntime("org.apache.logging.log4j:log4j-core:${log4jVersion}")
+    testRuntime("org.apache.logging.log4j:log4j-jul:${log4jVersion}")
 
 }
 
