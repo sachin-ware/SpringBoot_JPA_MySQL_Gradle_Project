@@ -302,10 +302,10 @@ Ex. If testCompile:Junit dependency is giving error while build process then rem
 
 /***********************Configure project for PostgreSQL Databse*************/
 
-1.Add dependancy 'runtime('org.postgresql:postgresql')' in build.dradle in dependancies object.
-2.Now run gradlew eclipse eclipse to download latest added dependancies.
-3.now fun 'gradlew clean build' 
-4.In Application.properties file add driver and other details related to postgresSQL :
+1. Add dependancy 'runtime('org.postgresql:postgresql')' in build.dradle in dependancies object.
+2. Now run gradlew eclipse eclipse to download latest added dependancies.
+3. now fun 'gradlew clean build' 
+4. In Application.properties file add driver and other details related to postgresSQL :
 		spring.jpa.database=POSTGRESQL 
 		spring.datasource.platform=postgres
 		spring.jpa.show-sql=true
