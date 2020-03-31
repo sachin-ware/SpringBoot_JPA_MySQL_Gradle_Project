@@ -294,6 +294,7 @@ clone project using git credientials and url.
 
 Note: If there is any gradle or maven dependancies that is causing a project build to fail, try to remove that dependency and then try to build again.
 Ex. If testCompile:Junit dependency is giving error while build process then remove this dependency and then try to build it again.
+OR for testcase errors temporary purpose you can ignore tests by following command " gradlew clean build -x test" -x will ignore the task mentioned next to it. 
 
 4. Check if database with name 'sachintestdb' is present with the username 'root' and password 'root' in the database, if not then create it.
 5. If tables required for the application are not present in the database, then we have to create them manually. For that you can use dbscript file present inside this project to produce tables.
