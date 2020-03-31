@@ -301,6 +301,7 @@ Ex. If testCompile:Junit dependency is giving error while build process then rem
 
 
 /***********************Configure project for PostgreSQL Databse*************/
+
 1.Add dependancy 'runtime('org.postgresql:postgresql')' in build.dradle in dependancies object.
 2.Now run gradlew eclipse eclipse to download latest added dependancies.
 3.now fun 'gradlew clean build' 
